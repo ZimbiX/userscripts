@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bank of Melbourne: Fix Bitwarden autofill
 // @namespace    http://tampermonkey.net/
-// @version      1.0.2
+// @version      1.0.3
 // @description  See my blog post: https://medium.com/@ZimbiX/bank-of-melbourne-st-george-ce9079adc017
 // @author       Brendan Weibrecht
 // @match        https://ibanking.bankofmelbourne.com.au/ibank/loginPage.action
@@ -11,7 +11,7 @@
 // @match        https://ibanking.banksa.com.au/ibank/loginPage.action
 // @match        https://ibanking.banksa.com.au/ibank/logonActionSimple.action
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bankofmelbourne.com.au
-// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/bank-of-melbourne_fix-bitwarden-autofill.user.js
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Bank%20of%20Melbourne%3A%20Fix%20Bitwarden%20autofill.user.js
 // @grant        none
 // ==/UserScript==
 
