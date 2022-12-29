@@ -1,0 +1,30 @@
+// ==UserScript==
+// @name         Gmail: Make scrollbar rightmost by hiding padding element
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       Brendan Weibrecht
+// @match        https://mail.google.com/mail/u/0/
+// @icon         https://www.google.com/a/cpanel/greensync.com.au/images/favicon.ico
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const addCss = (cssCode) => {
+        const styleElement = document.createElement("style")
+        styleElement.type = "text/css"
+        document.getElementsByTagName("head")[0].appendChild(styleElement)
+        if (styleElement.styleSheet) {
+            styleElement.styleSheet.cssText = cssCode
+        } else {
+            styleElement.innerHTML = cssCode
+        }
+    }
+
+    // Hide the column element that's between the scrollbar and the right edge of the window
+    addCss(
+        "div[tabindex='0'] + div > div > div > div[role=navigation] + div + div { display: none; } "
+    )
+})();
