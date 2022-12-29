@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Bank of Melbourne: Fix Bitwarden autofill
 // @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  See my blog post on Medium: https://medium.com/@ZimbiX
+// @version      1.0.1
+// @description  See my blog post: https://medium.com/@ZimbiX/bank-of-melbourne-st-george-ce9079adc017
 // @author       Brendan Weibrecht
 // @match        https://ibanking.bankofmelbourne.com.au/ibank/loginPage.action
 // @match        https://ibanking.bankofmelbourne.com.au/ibank/logonActionSimple.action
