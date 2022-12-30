@@ -1,6 +1,6 @@
 # ZimbiX's userscripts
 
-See [`js/``](js/) for the list of userscripts.
+See [`js/`](js/) for the list of userscripts.
 
 Additionally, the following ones are instead distributed as Chrome extensions:
 
