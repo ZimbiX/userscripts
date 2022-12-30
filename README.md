@@ -1,5 +1,7 @@
 # ZimbiX's userscripts
 
+A collection of my Tampermonkey userscripts used to improve particular websites.
+
 See [`js/`](js/) for the list of userscripts.
 
 Additionally, the following ones are instead distributed as Chrome extensions:
