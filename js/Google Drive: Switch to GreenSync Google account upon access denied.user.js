@@ -8,6 +8,7 @@
 // @match        https://docs.google.com/*
 // @icon         https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Google%20Drive%3A%20Switch%20to%20GreenSync%20Google%20account%20upon%20access%20denied.user.js
 // ==/UserScript==
 (() => {
     'use strict';

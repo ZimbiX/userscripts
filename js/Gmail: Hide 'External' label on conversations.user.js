@@ -7,6 +7,7 @@
 // @match        https://mail.google.com/mail/u/1/*
 // @icon         https://www.google.com/a/cpanel/greensync.com.au/images/favicon.ico
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Gmail%3A%20Hide%20%27External%27%20label%20on%20conversations.user.js
 // ==/UserScript==
 
 (function() {

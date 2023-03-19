@@ -7,6 +7,7 @@
 // @match        https://app.zenhub.com/workspaces/*
 // @icon         https://app.zenhub.com/dist/favicon/apple-touch-icon.png
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/ZenHub%3A%20Link%20from%20board%20to%20GitHub%20issues.%20For%20ZenHub%20Board%202.0.user.js
 // ==/UserScript==
 
 (function() {

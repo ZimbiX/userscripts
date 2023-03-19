@@ -8,6 +8,7 @@
 // @icon         https://github.githubassets.com/favicons/favicon.svg
 // @grant        none
 // @run-at       document-start
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/GitHub%3A%20Use%20monospace%20font%20on%20diffs.user.js
 // ==/UserScript==
 
 (function() {

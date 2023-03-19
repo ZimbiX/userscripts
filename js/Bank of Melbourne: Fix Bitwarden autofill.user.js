@@ -11,8 +11,8 @@
 // @match        https://ibanking.banksa.com.au/ibank/loginPage.action
 // @match        https://ibanking.banksa.com.au/ibank/logonActionSimple.action
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=bankofmelbourne.com.au
-// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Bank%20of%20Melbourne%3A%20Fix%20Bitwarden%20autofill.user.js
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Bank%20of%20Melbourne%3A%20Fix%20Bitwarden%20autofill.user.js
 // ==/UserScript==
 
 (function() {

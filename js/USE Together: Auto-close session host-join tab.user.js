@@ -8,6 +8,7 @@
 // @match        https://web.use-together.com/launch?*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=use-together.com
 // @grant        window.close
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/USE%20Together%3A%20Auto-close%20session%20host-join%20tab.user.js
 // ==/UserScript==
 
 (() => {

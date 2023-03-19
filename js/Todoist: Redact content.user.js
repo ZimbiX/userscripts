@@ -7,6 +7,7 @@
 // @match        https://todoist.com/app*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=todoist.com
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Todoist%3A%20Redact%20content.user.js
 // ==/UserScript==
 
 (function() {

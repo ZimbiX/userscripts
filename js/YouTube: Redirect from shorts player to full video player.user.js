@@ -7,6 +7,7 @@
 // @match        https://www.youtube.com/shorts/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/YouTube%3A%20Redirect%20from%20shorts%20player%20to%20full%20video%20player.user.js
 // ==/UserScript==
 
 (function() {

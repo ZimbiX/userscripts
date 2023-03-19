@@ -7,6 +7,7 @@
 // @match        https://extensions.gnome.org/local/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=extensions.gnome.org
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Gnome%20Extensions%3A%20Improvements.user.js
 // ==/UserScript==
 
 (function() {

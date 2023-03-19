@@ -7,6 +7,7 @@
 // @match        https://mail.google.com/mail/u/0/
 // @icon         https://www.google.com/a/cpanel/greensync.com.au/images/favicon.ico
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Gmail%3A%20Make%20scrollbar%20rightmost%20by%20hiding%20padding%20element.user.js
 // ==/UserScript==
 
 (function() {

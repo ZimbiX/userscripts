@@ -8,6 +8,7 @@
 // @icon         https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-512dp/logo_meet_2020q4_color_1x_web_512dp.png
 // @grant        none
 // @run-at       document-start
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Google%20Meet%3A%20Embiggen%20mic%20mute%20button.user.js
 // ==/UserScript==
 
 (function() {

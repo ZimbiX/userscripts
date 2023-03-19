@@ -6,6 +6,7 @@
 // @match        https://buildkite.com/gs/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=buildkite.com
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Buildkite%3A%20Add%20app%20build%20%26%20environments%20pipeline%20links%20on%20pipelines%20of%20GreenSync%20projects.user.js
 // ==/UserScript==
 
 (() => {

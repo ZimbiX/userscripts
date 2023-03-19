@@ -8,6 +8,7 @@
 // @match        https://nebula.tv/*
 // @icon         https://nebula.app/favicon.ico
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Nebula%3A%20Fix%20video%20control%20buttons%20screen%20edge%20alignment.user.js
 // ==/UserScript==
 
 (function() {

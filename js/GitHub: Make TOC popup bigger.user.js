@@ -7,6 +7,7 @@
 // @match        https://github.com/*
 // @icon         https://github.githubassets.com/favicons/favicon.svg
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/GitHub%3A%20Make%20TOC%20popup%20bigger.user.js
 // ==/UserScript==
 
 (function() {

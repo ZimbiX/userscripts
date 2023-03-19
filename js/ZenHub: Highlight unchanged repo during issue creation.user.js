@@ -7,6 +7,7 @@
 // @match        https://app.zenhub.com/workspaces/*
 // @grant        none
 // @icon         https://app.zenhub.com/dist/favicon/apple-touch-icon.png
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/ZenHub%3A%20Highlight%20unchanged%20repo%20during%20issue%20creation.user.js
 // ==/UserScript==
 
 (function() {

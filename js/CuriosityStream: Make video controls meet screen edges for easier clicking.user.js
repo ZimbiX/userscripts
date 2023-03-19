@@ -7,6 +7,7 @@
 // @match        https://curiositystream.com/video/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=curiositystream.com
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/CuriosityStream%3A%20Make%20video%20controls%20meet%20screen%20edges%20for%20easier%20clicking.user.js
 // ==/UserScript==
 
 (function() {

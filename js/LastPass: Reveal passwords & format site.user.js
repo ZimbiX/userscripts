@@ -7,6 +7,7 @@
 // @match        https://lastpass.com/?ac=1&lpnorefresh=1
 // @icon         https://www.google.com/s2/favicons?domain=lastpass.com
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/LastPass%3A%20Reveal%20passwords%20%26%20format%20site.user.js
 // ==/UserScript==
 
 (function() {

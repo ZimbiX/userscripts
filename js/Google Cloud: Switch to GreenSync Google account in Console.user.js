@@ -8,6 +8,7 @@
 // @icon         https://ssl.gstatic.com/pantheon/images/favicon/default.png
 // @grant        none
 // @run-at       document-start
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Google%20Cloud%3A%20Switch%20to%20GreenSync%20Google%20account%20in%20Console.user.js
 // ==/UserScript==
 'use strict';
 const setUrlParam = ({url, name, value}) => {

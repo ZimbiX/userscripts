@@ -8,6 +8,7 @@
 // @grant        none
 // @run-at       document-start
 // @icon         https://app.zenhub.com/dist/favicon/apple-touch-icon.png
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/ZenHub%3A%20Redirect%20from%20issue%20to%20GitHub%20issue.user.js
 // ==/UserScript==
 
 (function() {

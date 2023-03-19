@@ -6,6 +6,7 @@
 // @match        https://buildkite.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=buildkite.com
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Buildkite%3A%20Add%20pipelines%20links%20for%20GS%20filters.user.js
 // ==/UserScript==
 
 (function() {

@@ -7,6 +7,7 @@
 // @match        https://pop.com/j/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=pop.com
 // @grant        window.close
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Pop%3A%20Auto-close%20session%20join%20tab.user.js
 // ==/UserScript==
 
 (function() {
