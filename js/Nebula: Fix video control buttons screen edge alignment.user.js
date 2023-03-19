@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Nebula: Fix video control buttons screen edge alignment
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      3.0
 // @description  Make it easier to click on the play/pause and fullscreen buttons - being able to just flick your cursor to the corners of the screen, like with YouTube's fullscreen button
 // @author       You
-// @match        https://nebula.app/videos/*
-// @match        https://nebula.tv/videos/*
+// @match        https://nebula.app/*
+// @match        https://nebula.tv/*
 // @icon         https://nebula.app/favicon.ico
 // @grant        none
 // ==/UserScript==
@@ -45,6 +45,16 @@
             "#fullscreen-mode-button > svg {",
             "  width: calc(32px + 24px) !important;",
             "  padding-right: 24px !important;",
+            "}",
+
+            // Make the video controls hover animation activate at the bottom edge of the screen
+            "#video-controls svg {",
+            "  height: 100% !important;",
+            "}",
+
+            // Prevent the stupid curve overlays on the video corners from blocking corner clicks by bringing the controls in front
+            "#video-player .video-player-controls-wrapper {",
+            "  z-index: 3 !important;",
             "}",
         ].join(' ')
     )
