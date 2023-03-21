@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -Eeuo pipefail
+
+cd "$(dirname "$0")/.."
+
+# Import from the zip file that was exported from Tampermonkey
+rm -f js/*
+unzip ~/Downloads/tampermonkey_scripts.zip -d js
+rm -f ~/Downloads/tampermonkey_scripts.zip js/*.json
+
+# Add downloadURL directive to each script
+ruby -r cgi -e "
+  Dir.chdir('js')
+  Dir['*'].each do |js_filename|
+    download_url_filename = CGI.escape(js_filename).gsub('+', '%20')
+    download_url = 'https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/' + download_url_filename
+    new_content =
+      File
+        .read(js_filename)
+        .gsub(/^.* @downloadURL .*\n/, '')
+        .gsub(/(\/\/ ==\/UserScript==)/, \"// @downloadURL  #{download_url}\\n\" + '\1')
+    File.write(js_filename, new_content)
+  end
+"

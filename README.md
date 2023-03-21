@@ -15,8 +15,4 @@ Additionally, the following ones are instead distributed as Chrome extensions:
 - Tick the checkbox that appears to select all userscripts
 - Select 'Export' from the dropdown
 - Click 'Start'
-- In this repo, run:
-
-    ```bash
-    rm -f js/* && unzip ~/Downloads/tampermonkey_scripts.zip -d js && rm -f ~/Downloads/tampermonkey_scripts.zip js/*.json
-    ```
+- In this repo, run: `./scripts/import-from-tampermonkey-download`
