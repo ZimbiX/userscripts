@@ -29,12 +29,12 @@
     }
 
     addCss(`
-        button[aria-label$="(ctrl + d)"] {
+        button[aria-label$="(CTRL + D)"] {
           padding: 32px !important;
           margin-top: -12px !important;
         }
 
-        button[aria-label$="(ctrl + d)"] svg {
+        button[aria-label$="(CTRL + D)"] svg {
           width: 28px !important;
           height: auto !important;
         }
