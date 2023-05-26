@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Bank of Melbourne: Fix Bitwarden autofill
 // @namespace    http://tampermonkey.net/
-// @version      1.0.3
+// @version      1.1.0
 // @description  See my blog post: https://medium.com/@ZimbiX/bank-of-melbourne-st-george-ce9079adc017
 // @author       Brendan Weibrecht
 // @match        https://ibanking.bankofmelbourne.com.au/ibank/loginPage.action
@@ -18,10 +18,13 @@
 (function() {
     'use strict';
 
+    const securityNumberElement = document.getElementById('securityNumber')
+    const passwordElement = document.getElementById('internet-password')
+
+    const consoleLogHeadingStyle = 'font-weight: bold; font-size: 1.7em;'
+
     // Makes debugging easier
     const changePasswordInputsTypeToText = () => {
-        const securityNumberElement = document.getElementById('securityNumber')
-        const passwordElement = document.getElementById('internet-password')
         console.log(securityNumberElement)
         console.log(passwordElement)
         securityNumberElement.setAttribute('type', 'text')
@@ -40,6 +43,8 @@
         console.log(`hasValue: ${field.getAttribute('hasValue')}`)
     }
 
+    const delayMs = 1
+
     // The website primarily listens for the focusout event to then perform obfuscation.
     // This does get triggered by Bitwarden autofill, so the values do get obfuscated, but they don't stay that way!
     // Bitwarden must be also then using the `value=` setter, which does not trigger any events, and clobbers the obfuscated value.
@@ -47,7 +52,7 @@
     const wrapObfuscationToRestoreObfuscatedValueAMomentLater = () => {
         const fnObfuscateInputOrig = window.fnObfuscateInput
         window.fnObfuscateInput = (field) => {
-            console.log(`fnObfuscateInput running for: ${field.id}`)
+            console.log(`%cfnObfuscateInput running for: ${field.id}`, consoleLogHeadingStyle)
 
             console.log('Before obfuscation:')
             sitRep(field)
@@ -58,15 +63,30 @@
             const obfuscatedValue = field.value
 
             setTimeout(() => {
-                console.log('1ms later:')
+                console.log(`%c${delayMs}ms later:`, consoleLogHeadingStyle)
                 sitRep(field)
                 console.log(`Restoring obfuscated value: ${obfuscatedValue}`)
                 field.value = obfuscatedValue
-            }, 1)
+            }, delayMs)
+        }
+    }
+
+    // When Bitwarden autofill runs, sometimes the obfuscation for a field isn't triggered for some reason.
+    // To work around this, I wait for autofill (polling for the first time the password is filled), then trigger the obfuscation on both fields to ensure it gets run.
+    const triggerObfuscationUponAutofill = () => {
+        if (passwordElement.value != '') {
+            setTimeout(() => {
+                console.log(`%cAutofill detected; triggering obfuscation`, consoleLogHeadingStyle)
+                window.fnObfuscateInput(securityNumberElement)
+                window.fnObfuscateInput(passwordElement)
+            }, delayMs + 1)
+        } else {
+            setTimeout(triggerObfuscationUponAutofill, 10)
         }
     }
 
     disableRememberMe()
     // changePasswordInputsTypeToText()
     wrapObfuscationToRestoreObfuscatedValueAMomentLater()
+    triggerObfuscationUponAutofill()
 })();
