@@ -28,7 +28,7 @@
     addCss(
         [
             // Make video control buttons meet the left and right edges of the screen, by removing padding
-            "#video-controls > #video-scrubber + div {",
+            "#video-controls > div[aria-label=scrubber] + div {",
             "  padding: 0 !important;",
             "}",
 
