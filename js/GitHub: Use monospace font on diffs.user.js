@@ -32,7 +32,8 @@
     }
 
     const myCss = `
-        pre, code, .blob-code-inner, .text-mono {
+        pre, code, .blob-code-inner, .text-mono,
+        #read-only-cursor-text-area, #highlighted-line-menu-positioner, .react-code-text {
             font-family: Liberation Mono, monospace !important;
         }
     `
