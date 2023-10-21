@@ -47,8 +47,8 @@
         }
     }
 
-    onEvent('click', 'button[data-e2e="components/stack-rows/event/primary:button-primary"]', () => {
-        console.log('Find tickets button clicked'); // e.g. Oztix
+    onEvent('click', 'a[data-e2e="components/stack-rows/event/primary"]', () => {
+        console.log('Find tickets button/row clicked'); // e.g. Oztix
         attemptToClickButton({
             buttonName: 'Continue',
             buttonSelector: 'button[data-e2e="components/modals/primary-link:button-continue"]',
