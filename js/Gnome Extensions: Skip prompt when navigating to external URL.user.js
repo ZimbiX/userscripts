@@ -17,6 +17,4 @@
     // It's double-encoded for some reason
     const decodedExternalUrl = decodeURIComponent(decodeURIComponent(encodedExternalUrl))
     window.location = decodedExternalUrl
-
-    // Your code here...
 })();
