@@ -27,35 +27,42 @@
     };
 
     const addCss = (cssCode) => {
-        const styleElement = document.createElement("style")
-        styleElement.type = "text/css"
-        document.getElementsByTagName("head")[0].appendChild(styleElement)
+        const styleElement = document.createElement("style");
+        styleElement.type = "text/css";
+        document.getElementsByTagName("head")[0].appendChild(styleElement);
         if (styleElement.styleSheet) {
-            styleElement.styleSheet.cssText = cssCode
+            styleElement.styleSheet.cssText = cssCode;
         } else {
-            styleElement.innerHTML = cssCode
+            styleElement.innerHTML = cssCode;
         }
     }
 
     // Make the TOC just about as wide as the repo readme, and nicely fill the window height if it's longer than that
-    addCss("readme-toc .js-sticky .SelectMenu-modal { width: 878px; max-height: calc(100vh - 80px) !important; }")
+    addCss(
+        // When the absolute left position is calculated by GitHub's JS, it will take this updated width into account
+        "#__primerPortalRoot__ > div > div.hgdend[class*=Overlay__StyledOverlay-sc-] {" +
+        "  width: 878px;" +
+        "}"
+    )
 
-    // Increase the indent of TOC menu items to aid visual differentiation of heading levels
-    document.querySelectorAll('readme-toc .js-sticky .SelectMenu-list a').forEach((item) => {
-        const paddingLeft = getComputedStyle(item).paddingLeft
-        item.style.paddingLeft = `calc(${paddingLeft} * 2)`
-    })
+    const readmeHeaderSelector = '.Layout-main div[itemtype="https://schema.org/abstract"]';
 
-    // On opening the TOC, scroll down to show the full TOC menu if necessary
-    onEvent('click', 'readme-toc .js-sticky details', (e) => {
-        const readme = document.querySelector('#readme')
-        const isTocBannerAtTopOfWindow = readme.getBoundingClientRect().top < 0
+    // On opening the TOC
+    onEvent('click', readmeHeaderSelector + ' button[aria-label=Outline]', (e) => {
+        // Increase the indent of TOC menu items to aid visual differentiation of heading levels
+        setTimeout(() => {
+            document.querySelectorAll('#__primerPortalRoot__ > div > div.hgdend[class*=Overlay__StyledOverlay-sc-] a span > div').forEach((item) => {
+                const paddingLeft = getComputedStyle(item).paddingLeft;
+                item.style.paddingLeft = `calc(${paddingLeft} * 2)`;
+            })
+        }, 1);
+
+        // Scroll down to show the full TOC menu if necessary
+        const readmeHeader = document.querySelector(readmeHeaderSelector);
+        const isTocBannerAtTopOfWindow = readmeHeader.getBoundingClientRect().top === 0;
         if (!isTocBannerAtTopOfWindow) {
-            const readmeY = readme.getBoundingClientRect().top + window.scrollY
-            // Unlike the repo readme, on doc pages, the banner jumps out of position, so we need to compensate
-            const jumpingBanner = e.target.closest('.Box-header.js-sticky')
-            const jumpingBannerHeight = jumpingBanner ? jumpingBanner.getBoundingClientRect().height : 0
-            window.scroll({ top: readmeY - jumpingBannerHeight + 1 })
+            const readmeHeaderY = readmeHeader.getBoundingClientRect().top + window.scrollY;
+            window.scroll({ top: readmeHeaderY });
         }
     })
 })();
