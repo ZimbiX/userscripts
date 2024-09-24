@@ -18,6 +18,7 @@
     const retryableExitStatusLineErrors = [
         'Exited with status 255 (after intercepting the agent’s termination signal, sent because the agent was stopped)',
         'Terminated with signal SIGTERM (from the agent because the agent was stopped). Exit status -1',
+        'Terminated with signal SIGKILL (from the agent because the agent was stopped). Exit status -1',
     ];
 
     const retryFailedJobs = () => {
