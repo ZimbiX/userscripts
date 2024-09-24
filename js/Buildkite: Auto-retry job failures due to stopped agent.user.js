@@ -15,6 +15,11 @@
 
     const isLastChild = (e) => (e === e.parentNode.children[e.parentNode.children.length-1]);
 
+    const retryableExitStatusLineErrors = [
+        'Exited with status 255 (after intercepting the agent’s termination signal, sent because the agent was stopped)',
+        'Terminated with signal SIGTERM (from the agent because the agent was stopped). Exit status -1',
+    ];
+
     const retryFailedJobs = () => {
         // Expand all retryable failed jobs to populate exit status and retry button
         const failedJobHeadersUnexpanded = document.querySelectorAll('.build-details-pipeline-job-state-failed:not(.build-details-pipeline-job-expanded) > .build-details-pipeline-job__header');
@@ -32,12 +37,12 @@
 
         // Filter to jobs that failed due to a stopped agent
         const exitStatusLines = document.querySelectorAll('.JobLogComponent__ExitStatus');
-        const exitStatusLinesForStoppedAgent = Array.from(exitStatusLines).filter(line => line.textContent == 'Exited with status 255 (after intercepting the agent’s termination signal, sent because the agent was stopped)');
+        const exitStatusLinesForStoppedAgent = Array.from(exitStatusLines).filter(line => retryableExitStatusLineErrors.includes(line.textContent));
 
         // Click retry button for those jobs
         exitStatusLinesForStoppedAgent.forEach((exitStatusLineForStoppedAgent) => {
             const retryButton = exitStatusLineForStoppedAgent.closest('.build-details-pipeline-job-body').querySelector('.build-details-pipeline-job-body__actions a[href$="/retry"]');
-            if (retryButton.innerText == 'Retry') {
+            if (retryButton && retryButton.innerText == 'Retry') {
                 console.log('Retrying', retryButton);
                 retryButton.click();
             };
@@ -51,7 +56,7 @@
         setTimeout(() => {
             retryFailedJobs();
             loopRetryFailedJobs();
-        }, 100);
+        }, 10);
     };
 
     loopRetryFailedJobs();
