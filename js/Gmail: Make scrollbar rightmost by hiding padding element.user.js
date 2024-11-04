@@ -27,8 +27,9 @@
         }
     }
 
-    // Hide the column element that's between the scrollbar and the right edge of the window
+    // Squash the column that's between the scrollbar and the right edge of the window
+    // Don't just hide the column because then the quick settings can't open
     addCss(
-        "div[tabindex='0'] + div > div > div > div[role=navigation] + div + div { display: none; } "
+        "div[tabindex='0'] + div > div > div > div[role=navigation] + div + div > div > div { min-width: 0 !important; } "
     )
 })();
