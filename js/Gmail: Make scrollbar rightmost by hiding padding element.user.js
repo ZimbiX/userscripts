@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gmail: Make scrollbar rightmost by hiding padding element
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      2024-11-04
 // @description  try to take over the world!
 // @author       Brendan Weibrecht
 // @match        https://mail.google.com/mail/u/0/
@@ -14,13 +14,16 @@
     'use strict';
 
     const addCss = (cssCode) => {
+        const noopTrustPolicy = trustedTypes.createPolicy("noopTrustPolicy", {
+            createHTML: (string) => string
+        })
         const styleElement = document.createElement("style")
         styleElement.type = "text/css"
         document.getElementsByTagName("head")[0].appendChild(styleElement)
         if (styleElement.styleSheet) {
             styleElement.styleSheet.cssText = cssCode
         } else {
-            styleElement.innerHTML = cssCode
+            styleElement.innerHTML = noopTrustPolicy.createHTML(cssCode)
         }
     }
 
