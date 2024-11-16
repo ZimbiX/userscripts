@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Amber: Make graphs be stacked vertically
 // @namespace    http://tampermonkey.net/
-// @version      2024-05-07
+// @version      2024-11-16
 // @description  try to take over the world!
 // @author       You
-// @match        https://app.amber.com.au/usage/
+// @match        https://app.amber.com.au/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=amber.com.au
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Amber%3A%20Make%20graphs%20be%20stacked%20vertically.user.js
@@ -24,16 +24,20 @@
         }
     }
 
-    addCss(
-        [
-            "div[class*=UsagePage__StyledUsageDetail] {",
-            "  display: flex !important;",
-            "  flex-direction: column !important;",
-            "}",
+    const run = () => {
+        if (window.location.pathname == '/usage/') {
+            addCss(
+                [
+                    "main > div:last-child > div {",
+                    "  display: block !important;",
+                    "}",
+                ].join(' ')
+            );
+        }
+    }
 
-            "div[class*=UsagePage__StyledUsageDetail] .recharts-wrapper {",
-            "  height: 200 !important;",
-            "}",
-        ].join(' ')
-    )
+    window.navigation.addEventListener('navigate', () => {
+        console.log('navigate event - to:', window.location.pathname);
+        run();
+    });
 })();
