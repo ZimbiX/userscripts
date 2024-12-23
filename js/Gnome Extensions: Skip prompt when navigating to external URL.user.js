@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Gnome Extensions: Skip prompt when navigating to external URL
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      2024-12-24
 // @description  try to take over the world!
 // @author       You
 // @match        https://extensions.gnome.org/away/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=gnome.org
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=extensions.gnome.org
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Gnome%20Extensions%3A%20Skip%20prompt%20when%20navigating%20to%20external%20URL.user.js
 // ==/UserScript==
