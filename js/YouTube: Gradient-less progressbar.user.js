@@ -4,7 +4,7 @@
 // @version      2024-12-24
 // @description  try to take over the world!
 // @author       You
-// @match        https://www.youtube.com/watch?v=8Tpq-af78Kk
+// @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/YouTube%3A%20Gradient-less%20progressbar.user.js
