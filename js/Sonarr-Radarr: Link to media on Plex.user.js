@@ -1,13 +1,14 @@
 // ==UserScript==
-// @name         Radarr: Link to movie on Plex
+// @name         Sonarr/Radarr: Link to media on Plex
 // @namespace    http://tampermonkey.net/
 // @version      2024-12-05
 // @description  try to take over the world!
 // @author       You
+// @match        http://10.99.1.11:8989/series/*
 // @match        http://10.99.1.11:7878/movie/*
-// @icon         https://radarr.video/img/favicon.ico
+// @icon         https://wiki.servarr.com/favicon.ico
 // @grant        none
-// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Radarr%3A%20Link%20to%20movie%20on%20Plex.user.js
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Sonarr-Radarr%3A%20Link%20to%20media%20on%20Plex.user.js
 // ==/UserScript==
 
 (function() {
@@ -24,7 +25,12 @@
         }
     };
 
-    const run = (movieNameElement) => {
+    const insertAfterLastElementOfDetailsRow = (elementToInsert) => {
+        const lastElementOfDetailsRow = document.querySelector('div[class*="SeriesDetails-details-"] > div > *:last-child, div[class*="MovieDetails-details-"] > div > *:last-child');
+        lastElementOfDetailsRow.after(elementToInsert);
+    };
+
+    const run = (mediaNameElement) => {
         addCss(
             `.zimbix-plex-link {
                 width: 24px;
@@ -32,14 +38,19 @@
                 vertical-align: text-top;
                 border: 1px solid #555;
                 border-radius: 4px;
+            }
+            .zimbix-plex-link-sonarr {
+                margin-left: 15px;
+            }
+            .zimbix-plex-link-radarr {
                 margin-left: 10px;
             }`
         );
 
-        const movieName = movieNameElement.textContent;
+        const mediaName = mediaNameElement.textContent;
 
         const plexLink = document.createElement('a');
-        plexLink.href = 'https://app.plex.tv/desktop/#!/search?pivot=top&query=' + encodeURIComponent(movieName);
+        plexLink.href = 'https://app.plex.tv/desktop/#!/search?pivot=top&query=' + encodeURIComponent(mediaName);
         plexLink.title = 'Watch on Plex';
 
         const plexLogoImage = document.createElement('img');
@@ -47,14 +58,19 @@
         plexLogoImage.classList.add('zimbix-plex-link');
         plexLink.appendChild(plexLogoImage);
 
-        const movieDetailsLinks = document.querySelector('span[class*="MovieDetails-links-"]');
-        movieDetailsLinks.after(plexLink);
+        if (window.location.port == '8989') {
+            plexLogoImage.classList.add('zimbix-plex-link-sonarr');
+        } else {
+            plexLogoImage.classList.add('zimbix-plex-link-radarr');
+        }
+
+        insertAfterLastElementOfDetailsRow(plexLink);
     };
 
     const runWhenReady = () => {
-        const movieNameElement = document.querySelector('div[class*="MovieDetails-title-"]');
-        if (movieNameElement) {
-            run(movieNameElement);
+        const mediaNameElement = document.querySelector('div[class*="MovieDetails-title-"], div[class*="SeriesDetails-title-"]');
+        if (mediaNameElement) {
+            run(mediaNameElement);
         } else {
             setTimeout(runWhenReady, 10);
         }
