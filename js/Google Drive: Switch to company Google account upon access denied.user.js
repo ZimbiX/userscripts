@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Google Drive: Switch to GreenSync Google account upon access denied
+// @name         Google Drive: Switch to company Google account upon access denied
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -8,7 +8,7 @@
 // @match        https://docs.google.com/*
 // @icon         https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png
 // @grant        none
-// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Google%20Drive%3A%20Switch%20to%20GreenSync%20Google%20account%20upon%20access%20denied.user.js
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Google%20Drive%3A%20Switch%20to%20company%20Google%20account%20upon%20access%20denied.user.js
 // ==/UserScript==
 (() => {
     'use strict';
