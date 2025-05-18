@@ -1,2 +1,6 @@
 # Already published separately:
-/js/YouTube\ fast\ fullscreen\ toggle.user.js
+/js/YouTube fast fullscreen toggle.user.js
+
+# Third party
+# https://github.com/xthexder/wide-github/raw/refs/heads/master/build/wide-github.user.js
+/js/Wide GitHub.user.js
