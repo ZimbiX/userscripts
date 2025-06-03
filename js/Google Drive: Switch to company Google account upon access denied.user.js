@@ -13,7 +13,8 @@
 (() => {
     'use strict';
     const urlOrig = window.location.href;
-    if (document.title == 'Google Drive - Access Denied') {
+    console.log('document.title:', document.title);
+    if (document.title == 'Access denied') {
         if (!urlOrig.match('/u/1/')) {
             console.log('[Account Switcher] Switching...');
             const urlGS = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/drive)(/u/[0-9])?/'), '$1/u/1/');
