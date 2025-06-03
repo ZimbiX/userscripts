@@ -44,6 +44,7 @@
         };
     };
 
+    console.log('Mable AWS SSO: Auto-approve request to access environment');
     if (isPage1()) {
         console.log('Is page 1');
         runWhenReady(clickContinueOnPage1, headingTextOnPage1);
