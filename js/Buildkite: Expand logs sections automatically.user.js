@@ -14,7 +14,10 @@
     'use strict';
 
     const expandLogsSections = () => {
-        document.querySelectorAll('.fa-caret-right').forEach((e) => { e.click() })
+        document.querySelectorAll('.JobLogOutputComponent__Header').forEach((header) => {
+            const headerIsExpanded = !!header.nextSibling;
+            if (!headerIsExpanded) { header.querySelector('.JobLogOutputComponent__Header__Name').click(); };
+        });
         setTimeout(expandLogsSections, 100);
     }
 
