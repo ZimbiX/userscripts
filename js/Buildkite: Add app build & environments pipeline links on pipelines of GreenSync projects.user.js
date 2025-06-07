@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buildkite: Add app build & environments pipeline links on pipelines of GreenSync projects
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @author       Brendan Weibrecht
 // @match        https://buildkite.com/gs/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=buildkite.com
@@ -12,7 +12,8 @@
 (() => {
     'use strict';
 
-    const urlMatch = window.location.href.match(new RegExp("https://buildkite.com(/gs/[^/?]+)"))
+    const org = 'gs';
+    const urlMatch = window.location.href.match(new RegExp(`https://buildkite.com(/${org}/[^/?]+)`))
     if (!urlMatch) { return }
     const currentPath = urlMatch[1]
 
@@ -28,7 +29,7 @@
     }
 
     const addLink = (text, url) => {
-        const githubIconLink = document.querySelector(`#pipeline-header header a[href*="https://github.com/"] svg`).parentNode
+        const githubIconLink = document.querySelector(`div[data-testid="PipelineHeader"] a[href*="https://github.com/"] svg`).parentNode.parentNode
         const deploymentsLink = githubIconLink.cloneNode(true)
         deploymentsLink.href = url
         deploymentsLink.title = 'https://buildkite.com' + url
@@ -63,19 +64,16 @@
     }
 
     const generateUrl = (find, replace) => {
-        const pipelineName = currentPath.replace(new RegExp('^/gs/'), '').toLowerCase()
+        const pipelineName = currentPath.replace(new RegExp(`^/${org}/`), '').toLowerCase()
         const specialCase = specialCases[pipelineName]
-        return specialCase ? '/gs/' + specialCase : currentPath.replace(new RegExp(find), replace)
+        return specialCase ? `/${org}/` + specialCase : currentPath.replace(new RegExp(find), replace)
     }
 
     addCss(
         ".zimbix-alternate-pipeline-link {" +
         "  font-size: 1.4em;" +
-        "  margin-left: 7px;" +
-        "  padding-left: 8px;" +
-        "  margin-right: -8px;" +
-        "  padding-right: 8px;" +
         "  z-index: 1;" +
+        "  text-decoration: none !important;" +
         "}" +
         ".zimbix-alternate-pipeline-link:hover {" +
         "  filter: brightness(1.2);" +
