@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ZenHub: Highlight unchanged repo during issue creation
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  It's easy to forget to change the default repo when creating an issue on ZenHub; so make it easier to see that you haven't by showing a red border around the repo field until you click on it
 // @author       Brendan Weibrecht
 // @match        https://app.zenhub.com/workspaces/*
@@ -41,15 +41,15 @@
     }
 
     addCss(`
-        button[aria-label="Create Issue in Repo"]:not(.zimbix-changed) {
-          border: 2px solid red !important;
+        button[aria-label="Create Issue in Repo"] {
+          color: red !important;
         }
     `)
 
     const handleRepoChange = (e) => {
-        const button = e.target.closest('button[aria-label="Create Issue in Repo"]')
-        button.classList.add('zimbix-changed');
+        const button = e.target.closest('button[aria-label="Create Issue in Repo"]');
+        button.style.color = 'inherit !important';
     }
 
-    onEvent('click', 'button[aria-label="Create Issue in Repo"]', handleRepoChange);
+    onEvent('focus', 'button[aria-label="Create Issue in Repo"]', handleRepoChange);
 })();

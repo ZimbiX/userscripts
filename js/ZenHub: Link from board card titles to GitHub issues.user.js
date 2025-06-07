@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name         ZenHub: Link from board to GitHub issues. For ZenHub Board 2.0
+// @name         ZenHub: Link from board card titles to GitHub issues
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  When opening issues from a ZenHub board, use GitHub's UI rather than ZenHub's - when clicking on the issue title. Like a normal link, it supports both left-click (open in current tab) and middle-click (open in new tab). To open an issue in ZenHub's UI, click on any non-title part of the card. To drag an issue, you'll need to drag from any non-title part of the card.
 // @author       Brendan Weibrecht
 // @match        https://app.zenhub.com/workspaces/*
 // @icon         https://app.zenhub.com/dist/favicon/apple-touch-icon.png
 // @grant        none
-// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/ZenHub%3A%20Link%20from%20board%20to%20GitHub%20issues.%20For%20ZenHub%20Board%202.0.user.js
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/ZenHub%3A%20Link%20from%20board%20card%20titles%20to%20GitHub%20issues.user.js
 // ==/UserScript==
 
 (function() {
@@ -26,11 +26,20 @@
         }, true);
     };
 
+    const zenhubWorkspaceNameToGithubOrg = {
+        ZimbiX: 'ZimbiX',
+    };
+
+    const getGithubOrg = () => {
+        const workspaceName = document.querySelector('h1[data-testid="workspace-header-name"]').textContent;
+        return zenhubWorkspaceNameToGithubOrg[workspaceName] || 'greensync';
+    }
+
     const getIssueUrlForAddingLinkToCard = (cardTitleElement) => {
-        const headingElement = cardTitleElement.parentNode.children[0];
+        const headingElement = cardTitleElement.closest('div[data-testid="issue-card"]').querySelector('header');
         if (!headingElement) { return };
-        const [issueRepo, issueNumber] = Array(...headingElement.querySelectorAll('span > span[title]')).map(e => e.title.replace('#', ''));
-        return `https://github.com/greensync/${issueRepo}/issues/${issueNumber}`;
+        const [issueRepo, issueNumber] = Array(...headingElement.querySelectorAll('div[data-testid="header-title-text"] span[title]')).map(e => e.title.replace('#', ''));
+        return `https://github.com/${getGithubOrg()}/${issueRepo}/issues/${issueNumber}`;
     }
 
     const getIssueLinkUrlFromCard = (cardTitleElement) => {
@@ -70,13 +79,13 @@
 
     const refreshGithubLinks = () => {
         // console.log('refreshGithubLinks');
-        const cardIssueNumberElements =
+        const cardTitleElements =
               Array(
                   ...document.querySelectorAll(
-                      '.ReactVirtualized__Grid__innerScrollContainer div[data-rbd-draggable-id] span[title^="#"]'
+                      'main div[data-testid="board"] div[data-testid="issue-card"] section > div'
                   )
-              ).filter(e => e.title.match(new RegExp('^#[0-9]+$')));
-        const cardTitleElements = cardIssueNumberElements.map(e => e.parentElement.parentElement.parentElement.children[1]);
+              );
+        console.log(cardTitleElements);
         cardTitleElements.forEach(addTitleLinkIfNeeded);
         setTimeout(refreshGithubLinks, 1000);
     }
