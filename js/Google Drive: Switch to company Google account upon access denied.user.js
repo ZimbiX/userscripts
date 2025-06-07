@@ -17,8 +17,12 @@
     if (document.title == 'Access denied') {
         if (!urlOrig.match('/u/1/')) {
             console.log('[Account Switcher] Switching...');
-            const urlGS = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/drive)(/u/[0-9])?/'), '$1/u/1/');
-            window.location = urlGS;
+            const urlCompany = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/(drive|file|document))(/u/[0-9])?/'), '$1/u/1/');
+            if (urlCompany != urlOrig) {
+                window.location = urlCompany;
+            } else {
+                console.log('[Account Switcher] Error: Company URL to redirect to is the same as the current URL');
+            }
         } else {
             console.log('[Account Switcher] Already switched');
         }
