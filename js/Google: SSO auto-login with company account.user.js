@@ -37,7 +37,7 @@
 
     const isAppUsedByCompany = () => (
         redirectUriHost().match(new RegExp("(\.1password\.com|^miro\.com|\.atlassian\.com)$")) ||
-        document.referrer.match(new RegExp("(\.signin\.aws\.amazon\.com|\.cultureamp\.com|miro\.com|\.datadoghq\.com)/$"))
+        document.referrer.match(new RegExp("(\.signin\.aws\.amazon\.com|\.cultureamp\.com|miro\.com|\.datadoghq\.com|\.mable\.com\.au)/$"))
     )
 
     console.log('redirect_uri:', redirectUriHost());
