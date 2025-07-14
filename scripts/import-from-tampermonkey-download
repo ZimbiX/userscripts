@@ -7,7 +7,7 @@ cd "$(dirname "$0")/.."
 # Import from the zip file that was exported from Tampermonkey
 rm -f js/*
 unzip ~/Downloads/tampermonkey_scripts.zip -d js
-rm -f ~/Downloads/tampermonkey_scripts.zip js/*.json
+rm -f ~/Downloads/tampermonkey_scripts*.zip js/*.json
 
 # Add downloadURL directive to each script
 ruby -r cgi -e "
