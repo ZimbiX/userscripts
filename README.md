@@ -11,6 +11,7 @@ Additionally, the following ones are instead distributed as Chrome extensions:
 ## How to install userscripts
 
 - Download the [Tampermonkey](https://www.tampermonkey.net/) extension for your web browser
+- [Grant permission to execute userscripts](https://www.tampermonkey.net/faq.php#Q209) (enabling either "Allow User Scripts" in the extension's settings, or Developer Mode)
 - Browse to any userscript in [`js/`](js/) and click the 'Raw' button at the top-right — Tampermonkey should then prompt you to review and install it
 
 ## Note to self: how to refresh this repo
