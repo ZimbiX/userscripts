@@ -1,14 +1,13 @@
 // ==UserScript==
-// @name         Mable AWS SSO: Auto-approve request to access environment
+// @name         AWS SSO: Auto-approve request to access environment
 // @namespace    http://tampermonkey.net/
 // @version      2025-05-20
 // @description  try to take over the world!
 // @author       Brendan Weibrecht
-// @match        https://mable.awsapps.com/start/
-// @match        https://attainhealthtech.awsapps.com/start/
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=mable.com.au
+// @match        https://*.awsapps.com/start/
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=awsicons.dev
 // @grant        window.close
-// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Mable%20AWS%20SSO%3A%20Auto-approve%20request%20to%20access%20environment.user.js
+// @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/AWS%20SSO%3A%20Auto-approve%20request%20to%20access%20environment.user.js
 // ==/UserScript==
 
 (function() {
