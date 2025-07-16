@@ -8,6 +8,7 @@ cd "$(dirname "$0")/.."
 rm -f js/*
 unzip ~/Downloads/tampermonkey_scripts.zip -d js
 rm -f ~/Downloads/tampermonkey_scripts*.zip js/*.json
+find js -name \*Mable\* -delete
 
 # Add downloadURL directive to each script
 ruby -r cgi -e "
