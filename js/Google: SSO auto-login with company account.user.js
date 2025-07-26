@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google: SSO auto-login with company account
 // @namespace    http://tampermonkey.net/
-// @version      2025-05-23
+// @version      2025-07-27
 // @description  Requires your company account to be the second option (id 1)
 // @author       You
 // @match        https://accounts.google.com/v3/signin/accountchooser?*
@@ -36,8 +36,8 @@
     }
 
     const isAppUsedByCompany = () => (
-        redirectUriHost().match(new RegExp("(\.1password\.com|^miro\.com|\.atlassian\.com)$")) ||
-        document.referrer.match(new RegExp("(\.signin\.aws\.amazon\.com|\.cultureamp\.com|miro\.com|\.datadoghq\.com|\.mable\.com\.au)/$"))
+        redirectUriHost().match(new RegExp("(\.1password\.com|^miro\.com|\.atlassian\.com|\.twilio\.com)$")) ||
+        document.referrer.match(new RegExp("(\.signin\.aws\.amazon\.com|\.cultureamp\.com|miro\.com|\.datadoghq\.com|\.mable\.com\.au|\.databricks\.com)/$"))
     )
 
     console.log('redirect_uri:', redirectUriHost());
