@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google Drive: Switch to company Google account upon access denied
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      2025-07-26
 // @description  try to take over the world!
 // @author       Brendan Weibrecht
 // @match        https://drive.google.com/*
@@ -17,7 +17,7 @@
     if (document.title == 'Access denied') {
         if (!urlOrig.match('/u/1/')) {
             console.log('[Account Switcher] Switching...');
-            const urlCompany = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/(drive|file|document))(/u/[0-9])?/'), '$1/u/1/');
+            const urlCompany = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/(drive|file|document|presentation))(/u/[0-9])?/'), '$1/u/1/');
             if (urlCompany != urlOrig) {
                 window.location = urlCompany;
             } else {
