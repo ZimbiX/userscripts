@@ -36,7 +36,7 @@
         ].join(' ')
     )
 
-    document.querySelector('form[action^="/user/authorize/github_app"]').submit();
+    document.querySelector('form[action^="/user/authorize/github"]').submit();
 
     // GitHub login takes a little while, so disable the alternative to prevent thinking I need to use that
     document.querySelectorAll('form[action="/login"] input').forEach((input) => {
