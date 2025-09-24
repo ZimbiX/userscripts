@@ -40,4 +40,6 @@
         console.log('navigate event - to:', window.location.pathname);
         run();
     });
+
+    run();
 })();
