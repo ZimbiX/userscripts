@@ -5,7 +5,7 @@
 // @description  try to take over the world!
 // @author       You
 // @match        http://10.99.1.11:8112/
-// @icon         https://deluge-torrent.org/assets/deluge_icon.png
+// @icon         https://www.google.com/s2/favicons?sz=128&domain=deluge-torrent.org
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/Deluge%3A%20Fix%20scrollbar%20meeting%20screen%20edge.user.js
 // ==/UserScript==
