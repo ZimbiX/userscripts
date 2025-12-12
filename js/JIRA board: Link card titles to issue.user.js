@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JIRA board: Link card titles to issue
 // @namespace    http://tampermonkey.net/
-// @version      2025-07-16
+// @version      2025-12-12
 // @description  When opening issues from a JIRA board, use the whole page - when clicking on the issue title. Like a normal link, it supports both left-click (open in current tab) and middle-click (open in new tab). To open an issue in a modal, click on any non-title part of the card. To drag an issue, you'll need to drag from any non-title part of the card.
 // @author       Brendan Weibrecht
 // @match        https://*.atlassian.net/jira/software/c/projects/*/boards/*
@@ -12,6 +12,17 @@
 
 (function() {
     'use strict';
+
+    const addCss = (cssCode) => {
+        const styleElement = document.createElement("style")
+        styleElement.type = "text/css"
+        document.getElementsByTagName("head")[0].appendChild(styleElement)
+        if (styleElement.styleSheet) {
+            styleElement.styleSheet.cssText = cssCode
+        } else {
+            styleElement.innerHTML = cssCode
+        }
+    }
 
     // http://youmightnotneedjquery.com/#delegate
     const onEvent = (eventName, elementSelector, handler) => {
@@ -43,8 +54,8 @@
 
     const wrap = (toWrap, wrapper) => {
         wrapper = wrapper;
-        toWrap.parentNode.appendChild(wrapper);
-        return wrapper.appendChild(toWrap);
+        toWrap.parentNode.prepend(wrapper);
+        return wrapper.prepend(toWrap);
     };
 
     const stopEvent = (event) => {
@@ -61,6 +72,9 @@
         link.style = 'color: inherit';
         link.onmousedown = stopEvent;
         link.onmouseup = stopEvent;
+        // Add a sibling node after to retain margin-bottom - avoids a style that sets margin-bottom to 0 for :last-child
+        const emptyNode = document.createElement('div');
+        link.appendChild(emptyNode);
         wrap(cardTitleElement, link);
     }
 
@@ -80,9 +94,33 @@
                       'span[class*="summary"]'
                   )
               );
-        cardTitleElements.forEach(addTitleLinkIfNeeded);
+        cardTitleElements.forEach(e => addTitleLinkIfNeeded(e.closest('div[data-component-selector="platform-card.ui.card.card-content.content-section"]')));
         setTimeout(refreshIssueLinks, 10);
     }
+
+    addCss(
+        [
+            // Adding the link wrapper element breaks the card title's edit button. But it's a silly feature anyway - so I'll just hide the button
+            '.zimbix-issue-link span > span {',
+            '  display: none !important',
+            '}',
+
+            /*
+            // Don't truncate the issue title
+            // TODO: Fix flash of untruncated card on scroll to top
+            '#jira-frontend ',
+            'div[data-test-id="software-board.board-area"] ',
+            '* {',
+            '  -webkit-line-clamp: unset !important;',
+            '}',
+
+            // Hide issue title tooltip, given it's redundant without truncation
+            '.atlaskit-portal-container div[role="tooltip"] {',
+            '  display: none !important;',
+            '}',
+            */
+        ].join(' ')
+    )
 
     const eventIsPrimaryMouseClick = (event) => (event.type == 'click');
 
