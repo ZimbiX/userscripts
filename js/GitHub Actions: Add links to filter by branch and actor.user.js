@@ -14,7 +14,7 @@
 (function() {
     'use strict';
 
-    const matchUrlRegex = new RegExp('^https://github.com/[^/]+/[^/]+/actions\\b');
+    const matchUrlRegex = new RegExp('^/[^/]+/[^/]+/actions\\b');
 
     const githubUsername = document.querySelector('meta[name="user-login"]').content;
 
@@ -35,7 +35,7 @@
         const newQuery = (query.replace(new RegExp(`\\b${key}:[^ ]+`), '') + ` ${key}:${value}`).replace(/^ /, '').replace(/ +/, ' ');
         filterUrlSearchParams.set('query', newQuery);
         filterUrlSearchParams.delete('page');
-        return window.location.pathname + '?' + filterUrlSearchParams.toString();
+        return window.location.pathname.replace(new RegExp('/runs/.*', ''), '') + '?' + filterUrlSearchParams.toString();
     }
 
     const addBranchFilterLink = (branchNameLink) => {
@@ -47,7 +47,7 @@
         link.title = 'Filter to branch';
         link.textContent = '🎯';
         link.className = 'zimbix-actions-branch-filter-link';
-        branchNameLink.parentNode.appendChild(link);
+        branchNameLink.after(link);
     }
 
     const addActorFilterLink = (actorNameLink) => {
@@ -59,7 +59,7 @@
         link.title = 'Filter to actor';
         link.textContent = '🎯';
         link.className = 'zimbix-actions-actor-filter-link';
-        actorNameLink.parentNode.appendChild(link);
+        actorNameLink.after(link);
     }
 
     addCss(
@@ -98,7 +98,7 @@
     }
 
     const run = () => {
-        if (window.location.href.match(matchUrlRegex)) {
+        if (window.location.pathname.match(matchUrlRegex)) {
             log(`Starting; waiting up to 1000ms for builds...`);
             waitForBuildList({ timeoutMs: 1000 });
         }
