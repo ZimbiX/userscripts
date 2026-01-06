@@ -14,6 +14,8 @@
 (function() {
     'use strict';
 
+    // TODO: Fix the links being removed from a build when it refreshes
+
     const matchUrlRegex = new RegExp('^/[^/]+/[^/]+/actions\\b');
 
     const githubUsername = document.querySelector('meta[name="user-login"]').content;
