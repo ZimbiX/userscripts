@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google: SSO auto-login with company account
 // @namespace    http://tampermonkey.net/
-// @version      2025-07-27
+// @version      2026-01-30
 // @description  Requires your company account to be the second option (id 1)
 // @author       You
 // @match        https://accounts.google.com/v3/signin/accountchooser?*
@@ -26,25 +26,34 @@
         companyAccountButton.click();
     }
 
-    const redirectUriHost = () => {
-        const redirectUri = (new URL(window.location)).searchParams.get('redirect_uri');
-        if (redirectUri) {
-            return (new URL(redirectUri)).host;
-        } else {
-            return '';
-        }
-    }
+    const hostnameRegexesOfAppsUsedByCompany = {
+        '1Password':  "1password\.com",
+        Miro:         "miro\.com",
+        Atlassian:    "atlassian\.com",
+        Twilio:       "twilio\.com",
+        Lever:        "lever\.co",
+        Multitudes:   "multitudes\.us\.auth0\.com",
+        AWS:          "(signin\.aws\.amazon\.com|signin\.aws)",
+        CultureAmp:   "cultureamp\.com",
+        Datadog:      "datadoghq\.com",
+        Mable:        "mable\.com\.au",
+        Databricks:   "databricks\.com",
+    };
 
-    const isAppUsedByCompany = () => (
-        redirectUriHost().match(new RegExp("(\.1password\.com|^miro\.com|\.atlassian\.com|\.twilio\.com|\.lever\.co|^multitudes\.us\.auth0\.com)$")) ||
-        document.referrer.match(new RegExp("(\.signin\.aws\.amazon\.com|\.signin\.aws|\.cultureamp\.com|miro\.com|\.datadoghq\.com|\.mable\.com\.au|\.databricks\.com)/$"))
-    )
+    const redirectUrl = (new URL(window.location)).searchParams.get('redirect_uri');
 
-    console.log('redirect_uri:', redirectUriHost());
+    const getHostname = (url) => (url ? (new URL(url).host) : '');
+
+    const appHostname = getHostname(redirectUrl || document.referrer);
+
+    console.log('redirect_uri:', redirectUrl);
     console.log('document.referrer:', document.referrer);
+    console.log('=> appHostname:', appHostname);
 
-    if (isAppUsedByCompany()) {
-        console.log('Referrer matched; selecting company account');
+    const appIsUsedByCompany = Object.values(hostnameRegexesOfAppsUsedByCompany).some(regex => appHostname.match(new RegExp(`(^|\.)${regex}\$`)));
+
+    if (appIsUsedByCompany) {
+        console.log('Referrer/redirect URL matched; selecting company account');
         if (window.location.pathname.match(new RegExp("^/o/oauth2"))) {
             // On /o/oauth2, clicking the button straight away doesn't do anything
             setTimeout(selectCompanyAccount, 100);
