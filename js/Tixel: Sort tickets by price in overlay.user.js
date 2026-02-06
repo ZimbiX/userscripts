@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Tixel: Sort tickets by price in overlay
 // @namespace    http://tampermonkey.net/
-// @version      2024-08-08
+// @version      2026-02-07
 // @description  try to take over the world!
-// @author       You
+// @author       Brendan Weibrecht
 // @match        https://tixel.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tixel.com
 // @grant        none
@@ -13,16 +13,28 @@
 (function() {
     'use strict';
 
+    const getPriceFromElement = element => parseFloat(element.innerText.match(/(?<=\$)\d+\.\d+/)[0]);
+
+    const sortElementsByPrice = elements => {
+        console.log('sortElementsByPrice');
+        const elementsWrapper = elements[0].parentNode
+        const elementsSortedByPrice = elements.toSorted((a, b) => (getPriceFromElement(a) - getPriceFromElement(b)));
+        elementsSortedByPrice.forEach(item => elementsWrapper.appendChild(item));
+    };
+
     const sortTickets = () => {
-        const ticketElements = document.querySelectorAll('div[id^=headlessui-dialog-panel-] .overflow-y-scroll:not(.zimbix-sorted) > button');
-        if (ticketElements.length == 0) { return };
+        const ticketlikeButtonElements = document.querySelectorAll('div[id^=headlessui-dialog-panel-] *:not(.zimbix-sorted) button:not(.zimbix-exclude)');
+        const ticketElements = [...ticketlikeButtonElements].filter(button => {
+            const isTicket = button.textContent.includes('$');
+            if (!isTicket) { button.classList.add('zimbix-exclude'); }
+            return isTicket;
+        });
+        if (ticketElements.length == 0) { return false; };
         const ticketElementsWrapper = ticketElements[0].parentNode;
         hideJoinWaitlistInOverlay(ticketElementsWrapper);
-        console.log('Sorting tickets by price...');
-        const getPrice = element => parseFloat(element.innerText.match(/(?<=\$)\d+\.\d+/)[0]);
-        const ticketElementsSortedByPrice = Array.from(ticketElements).toSorted((a, b) => (getPrice(a) - getPrice(b)));
-        ticketElementsSortedByPrice.forEach(item => ticketElementsWrapper.appendChild(item));
+        sortElementsByPrice(ticketElements);
         ticketElementsWrapper.classList.add('zimbix-sorted');
+        return true;
     };
 
     const hideJoinWaitlistInOverlay = (ticketElementsWrapper) => {
@@ -46,10 +58,10 @@
     };
 
     const loopSortTickets = () => {
+        console.log('loopSortTickets');
         setTimeout(() => {
-            sortTickets();
-            loopSortTickets();
-        }, 1);
+            sortTickets() || loopSortTickets();
+        }, 10);
     };
 
     loopSortTickets();
