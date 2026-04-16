@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JIRA board: Link card titles to issue
 // @namespace    http://tampermonkey.net/
-// @version      2025-12-12
+// @version      2026-04-16
 // @description  When opening issues from a JIRA board, use the whole page - when clicking on the issue title. Like a normal link, it supports both left-click (open in current tab) and middle-click (open in new tab). To open an issue in a modal, click on any non-title part of the card. To drag an issue, you'll need to drag from any non-title part of the card.
 // @author       Brendan Weibrecht
 // @match        https://*.atlassian.net/jira/software/c/projects/*/boards/*
@@ -38,7 +38,10 @@
     };
 
     const getIssueUrl = (cardTitleElement) => {
-        const cardButton = cardTitleElement.closest('div[draggable="true"]').children[0];
+        console.log(cardTitleElement);
+        const draggableAncestor = cardTitleElement.closest('div[draggable="true"]');
+        if (!draggableAncestor) { return };
+        const cardButton = draggableAncestor.children[0];
         if (!cardButton) { return };
         const issueId = cardButton.ariaLabel.split(' ')[0];
         return `https://${window.location.host}/browse/${issueId}`;
