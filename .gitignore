@@ -1,6 +1,10 @@
 # Already published separately:
+
 /js/YouTube fast fullscreen toggle.user.js
 
-# Third party
+# Third party:
+
 # https://github.com/xthexder/wide-github/raw/refs/heads/master/build/wide-github.user.js
 /js/Wide GitHub.user.js
+# https://greasyfork.org/en/scripts/574438-github-inline-issue-link-bypass, https://github.com/orgs/community/discussions/192665
+/js/GitHub Inline Issue Link Bypass.user.js
