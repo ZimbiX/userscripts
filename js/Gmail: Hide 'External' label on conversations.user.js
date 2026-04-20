@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gmail: Hide 'External' label on conversations
 // @namespace    http://tampermonkey.net/
-// @version      2024-11-04
+// @version      2026-04-20
 // @description  try to take over the world!
 // @author       Brendan Weibrecht
 // @match        https://mail.google.com/mail/u/1/*
@@ -28,6 +28,6 @@
     }
 
     addCss(
-        "h2[data-thread-perm-id] + span > div[data-tooltip-contained] { display: none; } "
+        'h2[data-thread-perm-id] + span span[data-is-tooltip-wrapper="true"]:first-child .aau { display: none; }'
     )
 })();
