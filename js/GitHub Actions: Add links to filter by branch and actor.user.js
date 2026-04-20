@@ -64,6 +64,13 @@
         actorNameLink.after(link);
     }
 
+    const addMyLinks = (branchNameLinks) => {
+        log('Adding filter links for branches and actors...');
+        branchNameLinks.forEach(addBranchFilterLink);
+        const actorNameLinks = document.querySelectorAll('a[data-hovercard-type="user"]');
+        actorNameLinks.forEach(addActorFilterLink);
+    }
+
     addCss(
         `.zimbix-actions-branch-filter-link, .zimbix-actions-actor-filter-link {
           font-size: 20px;
@@ -80,29 +87,33 @@
 
     const log = (msg) => console.log(`[Add links to filter by branch and actor] ${msg}`);
 
-    const waitForBuildList = ({ timeoutMs, waitedMs = 0 } = {}) => {
+    const waitForBuildList = ({ timeoutMs, waitedMs = 0, pollIntervalMs = 1 } = {}) => {
         if (document.querySelector('.zimbix-actions-branch-filter-link')) {
             log(`Has already added branch filter links; cancelling`);
             return
         }
         const branchNameLinks = document.querySelectorAll('.branch-name');
         if (branchNameLinks.length != 0) {
-            log(`Builds found; adding filter links for branches and actors...`);
-            branchNameLinks.forEach(addBranchFilterLink);
-            const actorNameLinks = document.querySelectorAll('a[data-hovercard-type="user"]');
-            actorNameLinks.forEach(addActorFilterLink);
+            log('Builds found');
+            addMyLinks(branchNameLinks);
         } else if (waitedMs < timeoutMs) {
-            log(`Builds not yet found; trying again in 1ms`);
-            setTimeout(() => waitForBuildList({ timeoutMs, waitedMs: waitedMs + 1 }), 1);
+            log(`Builds not yet found; trying again in ${pollIntervalMs}ms`);
+            setTimeout(() => waitForBuildList({ timeoutMs, waitedMs: waitedMs + pollIntervalMs }), pollIntervalMs);
         } else {
-            log(`Builds not found - timed out`);
+            log('Builds not found - timed out');
         }
+    }
+
+    const checkIfRefreshNeeded = () => {
+        log('Checking if a refresh is needed...');
+
     }
 
     const run = () => {
         if (window.location.pathname.match(matchUrlRegex)) {
-            log(`Starting; waiting up to 1000ms for builds...`);
-            waitForBuildList({ timeoutMs: 1000 });
+            const timeoutMs = 1000;
+            log(`Starting; waiting up to ${timeoutMs}ms for builds...`);
+            waitForBuildList({ timeoutMs });
         }
     }
 
