@@ -17,7 +17,7 @@
     if (document.title == 'Access denied') {
         if (!urlOrig.match('/u/1/')) {
             console.log('[Account Switcher] Switching...');
-            const urlCompany = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/(drive|file|document|presentation))(/u/[0-9])?/'), '$1/u/1/');
+            const urlCompany = urlOrig.replace(new RegExp('(https://(drive|docs).google.com/(drive|file|document|presentation|spreadsheets))(/u/[0-9])?/'), '$1/u/1/');
             if (urlCompany != urlOrig) {
                 window.location = urlCompany;
             } else {
