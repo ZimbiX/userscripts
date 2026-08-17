@@ -31,14 +31,19 @@
            200 = width of image unscaled
            93 = width of image after original blurry scaling */
         .AppDetail-module__V0AE0G__appScreenshots {
-            zoom: calc(200 / 93);
+            zoom: calc(200 / 93) !important;
         }
 
         /* Remove specific integer width of screenshots to avoid amplifying rounding error */
         .AppDetail-module__V0AE0G__screenshotSlider img {
             width: 93px !important;
             height: auto !important;
-            padding-top: 2px; /* Vertically center screenshots to compensate for the watch overlay image not having the right screen ratio */
+            padding-top: 2.4px !important; /* Vertically center screenshots to compensate for the watch overlay image not having the right screen ratio */
+        }
+
+        /* Fix the aspect ratio of the watch overlay image */
+        .AppDetail-module__V0AE0G__watchFrameOverlay {
+            background-size: 162px 221px !important;
         }
 
         /* Reduce how much of the watch band is shown now that the section is much bigger */
