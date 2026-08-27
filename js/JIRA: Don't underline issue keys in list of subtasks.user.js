@@ -4,7 +4,8 @@
 // @version      2026-08-26
 // @description  To be better able to visually distinguish between completed and non-completed tickets
 // @author       Brendan Weibrecht
-// @match        https://attainhealthtech.atlassian.net/browse/*
+// @match        https://*.atlassian.net/browse/*
+// @match        https://*.atlassian.net/jira/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=atlassian.net
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/JIRA%3A%20Don%27t%20underline%20issue%20keys%20in%20list%20of%20subtasks.user.js
