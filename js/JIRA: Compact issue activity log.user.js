@@ -2,7 +2,7 @@
 // @name         JIRA: Compact issue activity log
 // @namespace    http://tampermonkey.net/
 // @version      2025-10-10
-// @description  try to take over the world!
+// @description  Make the History tab of a Jira issue much more compact, so it looks like GitHub issue/PR history - each item displayed as a single line
 // @author       Brendan Weibrecht
 // @match        https://*.atlassian.net/browse/*
 // @match        https://*.atlassian.net/jira/*
