@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JIRA: Compact issue activity log
 // @namespace    http://tampermonkey.net/
-// @version      2025-10-10
+// @version      2026-08-31
 // @description  Make the History tab of a Jira issue much more compact, so it looks like GitHub issue/PR history - each item displayed as a single line
 // @author       Brendan Weibrecht
 // @match        https://*.atlassian.net/browse/*
@@ -50,10 +50,13 @@
         }
 
         /* Smaller inline avatars for issue assignee changes */
-        div[data-testid$=".history-item"] img[data-vc="avatar-image"] {
+        div[data-testid$=".history-item"] div[data-testid$=".assignee-avatar"] {
+            margin-right: 5px;
+        }
+        div[data-testid$=".history-item"] img[data-testid$=".assignee-avatar--image"] {
             width: 20px;
             height: 20px;
-            margin: -5px 0;
+            margin-bottom: -4px;
         }
 
         /* Add space after profile photo */
