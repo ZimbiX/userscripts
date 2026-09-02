@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JIRA: Compact issue activity log
 // @namespace    http://tampermonkey.net/
-// @version      2026-08-31
+// @version      2026-09-02
 // @description  Make the History tab of a Jira issue much more compact, so it looks like GitHub issue/PR history - each item displayed as a single line
 // @author       Brendan Weibrecht
 // @match        https://*.atlassian.net/browse/*
@@ -59,6 +59,16 @@
             margin-bottom: -4px;
         }
 
+        /* Smaller avatars for anonymous user */
+        span[data-testid="issue-history.ui.history-items.transition-history-item.history-item--avatar--inner"] > span {
+            border-radius: 9999px;
+            display: inline-block;
+        }
+        span[data-testid="issue-history.ui.history-items.transition-history-item.history-item--avatar--inner"] > span svg {
+            width: 20px;
+            height: 20px;
+        }
+
         /* Add space after profile photo */
         div[data-testid$=".history-item"] > div[data-vc="profilecard-wrapper"] {
             margin-right: 1ex;
@@ -72,6 +82,12 @@
         /* User name: Make it black */
         div[data-testid$=".history-item"] div[data-testid="profilecard-next.ui.profilecard.profilecard-trigger"] * {
             color: #000 !important;
+        }
+
+        /* Anonymous user name: Add a space after and make it black */
+        div[data-testid="issue-history.ui.history-items.transition-history-item.history-item"]:has(svg) > div:nth-child(2) > div:first-child > div:first-child > span:first-child {
+            color: #000 !important;
+            margin-right: 1ex !important;
         }
 
         /* Add space between text pieces */
