@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         JIRA board: Prevent card jiggle on scroll
 // @namespace    http://tampermonkey.net/
-// @version      2025-08-05
+// @version      2026-09-04
 // @description  (This may not be necessary anymore!) Jira removes cards from the DOM when they scroll out of view. The re-adding of the card and re-initialisation of its footer row causes a whopping five rounds of dimensions/position adjustment, which is visually jarring. Somehow I stumbled upon removing the footer's top margin as the solution.
 // @author       Brendan Weibrecht
-// @match        https://*.atlassian.net/jira/software/c/projects/*/boards/*
+// @match        https://*.atlassian.net/browse/*
+// @match        https://*.atlassian.net/jira/*
 // @icon         https://jobready.atlassian.net/favicon.ico
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/ZimbiX/userscripts/master/js/JIRA%20board%3A%20Prevent%20card%20jiggle%20on%20scroll.user.js
@@ -25,7 +26,7 @@
     };
 
     addCss(
-        `div[data-testid="platform-card.ui.card.card-content.footer"] {
+        `#jira-frontend div[data-test-id="software-board.board-area"] div[data-testid="platform-card.ui.card.card-content.footer"] {
             margin-top: 0 !important;
         }`
     );
